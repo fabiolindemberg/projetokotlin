@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">My Posts</string>
+    <string name="newPost">Novo Post</string>
+    <string name="title">Título</string>
+    <string name="description">Descrição</string>
+    <string name="cancelAction">Cancelar</string>
+    <string name="postAction">Gravar</string>
+</resources>
