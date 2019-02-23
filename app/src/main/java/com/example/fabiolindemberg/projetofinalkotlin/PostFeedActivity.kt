@@ -1,7 +1,5 @@
 package com.example.fabiolindemberg.projetofinalkotlin
 
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.AsyncTask
 import android.support.v7.app.AppCompatActivity
@@ -11,7 +9,6 @@ import android.view.Menu
 import android.view.MenuItem
 import com.example.fabiolindemberg.projetofinalkotlin.Adapters.PostAdapter
 import com.example.fabiolindemberg.projetofinalkotlin.Entities.Post
-import com.example.fabiolindemberg.projetofinalkotlin.R.id.rvPost
 import com.example.fabiolindemberg.projetofinalkotlin.Services.PostService
 import kotlinx.android.synthetic.main.activity_feed.*
 
@@ -30,6 +27,10 @@ class PostFeedActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+
+        if(item?.itemId == R.id.miNewPost){
+            startFeedInputActivity()
+        }
         return super.onOptionsItemSelected(item)
     }
 
@@ -53,7 +54,7 @@ class PostFeedActivity : AppCompatActivity() {
         var posts : List<Post>? = null
 
         override fun doInBackground(vararg params: Void?): List<Post>? {
-            return PostService.getPosts()
+            return PostService.getAll()
         }
 
         override fun onPreExecute() {
@@ -68,5 +69,10 @@ class PostFeedActivity : AppCompatActivity() {
             }
             super.onPostExecute(result)
         }
+    }
+
+    override fun onStart() {
+        someTask().execute()
+        super.onStart()
     }
 }
