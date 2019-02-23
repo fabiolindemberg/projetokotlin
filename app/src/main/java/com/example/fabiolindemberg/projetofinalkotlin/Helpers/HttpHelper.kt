@@ -1,5 +1,6 @@
 package com.example.fabiolindemberg.projetofinalkotlin.Helpers
 
+import android.util.Log
 import okhttp3.*
 import java.io.IOException
 
@@ -34,6 +35,7 @@ object HttpHelper {
     }
 
     private fun getJson(request: Request): String {
+        
         val response = client.newCall(request).execute()
         val responseBody = response.body()
         if(responseBody != null){
@@ -42,5 +44,24 @@ object HttpHelper {
         }
         throw IOException("Erro ao fazer requisição")
     }
+    /*
+    private fun getJson(request: Request): String {
+        client.newCall(request).enqueue(object : Callback{
+            override fun onResponse(call: Call, response: Response): String {
+                val responseBody = response.body()
+                if(responseBody != null){
+                    val json = responseBody.string()
+
+                    Log.d("Funcionou", json)
+                    return ""
+                }
+            }
+
+            override fun onFailure(call: Call, e: IOException) {
+                Log.d("Erro", e.message)
+            }
+        })
+    }
+    */
 
 }
