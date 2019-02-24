@@ -41,7 +41,7 @@ class PostFeedActivity : AppCompatActivity() {
 
     fun startPostDetailActivity(post: Post){
         val intent = Intent(this, PostDetailActivity::class.java)
-        intent.putExtra("aPost", post.toString())
+        intent.putExtra("aPost", post)
         startActivity(intent)
     }
 
