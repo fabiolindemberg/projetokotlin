@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import com.example.fabiolindemberg.projetofinalkotlin.Adapters.PostAdapter
+import com.example.fabiolindemberg.projetofinalkotlin.AndroidServices.NotificationService
 import com.example.fabiolindemberg.projetofinalkotlin.Entities.Post
 import com.example.fabiolindemberg.projetofinalkotlin.Services.PostService
 import kotlinx.android.synthetic.main.activity_feed.*
@@ -19,6 +20,8 @@ class PostFeedActivity : AppCompatActivity() {
         setContentView(R.layout.activity_feed)
 
         someTask().execute()
+
+        startService(Intent(this, NotificationService::class.java))
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
