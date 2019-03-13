@@ -1,9 +1,10 @@
-package com.example.fabiolindemberg.projetofinalkotlin
+package com.example.fabiolindemberg.projetofinalkotlin.Activities
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import com.example.fabiolindemberg.projetofinalkotlin.Entities.Post
+import com.example.fabiolindemberg.projetofinalkotlin.R
 
 class PostDetailActivity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package com.example.fabiolindemberg.projetofinalkotlin
+package com.example.fabiolindemberg.projetofinalkotlin.Activities
 
 import android.content.Intent
 import android.os.AsyncTask
@@ -8,9 +8,10 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import com.example.fabiolindemberg.projetofinalkotlin.Adapters.PostAdapter
-import com.example.fabiolindemberg.projetofinalkotlin.AndroidServices.NotificationService
+import com.example.fabiolindemberg.projetofinalkotlin.Services.NotificationService
 import com.example.fabiolindemberg.projetofinalkotlin.Entities.Post
-import com.example.fabiolindemberg.projetofinalkotlin.Services.PostService
+import com.example.fabiolindemberg.projetofinalkotlin.R
+import com.example.fabiolindemberg.projetofinalkotlin.Http.HttpService
 import kotlinx.android.synthetic.main.activity_feed.*
 
 class PostFeedActivity : AppCompatActivity() {
@@ -22,6 +23,10 @@ class PostFeedActivity : AppCompatActivity() {
         someTask().execute()
 
         startService(Intent(this, NotificationService::class.java))
+    }
+
+    fun setAlarmManager(){
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -57,7 +62,7 @@ class PostFeedActivity : AppCompatActivity() {
         var posts : List<Post>? = null
 
         override fun doInBackground(vararg params: Void?): List<Post>? {
-            return PostService.getAll()
+            return HttpService.getAll()
         }
 
         override fun onPreExecute() {

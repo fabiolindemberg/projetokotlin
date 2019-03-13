@@ -11,19 +11,19 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".PostFeedActivity">
+        <activity android:name=".Activities.PostFeedActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".PostInputActivity">
+        <activity android:name=".Activities.PostInputActivity">
         </activity>
-        <activity android:name=".PostDetailActivity">
+        <activity android:name=".Activities.PostDetailActivity">
         </activity>
         <service
-                android:name=".AndroidServices.NotificationService"
+                android:name=".Services.NotificationService"
                 android:enabled="true"
                 android:exported="true"
         >

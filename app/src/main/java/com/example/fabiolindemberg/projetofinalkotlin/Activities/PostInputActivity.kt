@@ -1,4 +1,4 @@
-package com.example.fabiolindemberg.projetofinalkotlin
+package com.example.fabiolindemberg.projetofinalkotlin.Activities
 
 import android.os.AsyncTask
 import android.support.v7.app.AppCompatActivity
@@ -6,7 +6,8 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import com.example.fabiolindemberg.projetofinalkotlin.Entities.Post
-import com.example.fabiolindemberg.projetofinalkotlin.Services.PostService
+import com.example.fabiolindemberg.projetofinalkotlin.R
+import com.example.fabiolindemberg.projetofinalkotlin.Http.HttpService
 
 class PostInputActivity : AppCompatActivity() {
 
@@ -33,7 +34,7 @@ class PostInputActivity : AppCompatActivity() {
             this.post = post
         }
         override fun doInBackground(vararg p0: Void?): Unit {
-            PostService.post(post)
+            HttpService.post(post)
         }
 
         override fun onPostExecute(result: Unit?) {
