@@ -1,17 +1,22 @@
 package com.example.fabiolindemberg.projetofinalkotlin.Activities
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import android.os.AsyncTask
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.SystemClock
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.example.fabiolindemberg.projetofinalkotlin.Adapters.PostAdapter
-import com.example.fabiolindemberg.projetofinalkotlin.Services.NotificationService
 import com.example.fabiolindemberg.projetofinalkotlin.Entities.Post
 import com.example.fabiolindemberg.projetofinalkotlin.R
 import com.example.fabiolindemberg.projetofinalkotlin.Http.HttpService
+import com.example.fabiolindemberg.projetofinalkotlin.Receivers.AlarmReceiver
 import kotlinx.android.synthetic.main.activity_feed.*
 
 class PostFeedActivity : AppCompatActivity() {
@@ -20,13 +25,17 @@ class PostFeedActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_feed)
 
-        someTask().execute()
+        loadPostsTask().execute()
 
-        startService(Intent(this, NotificationService::class.java))
+        scheduleNotificationService()
     }
 
-    fun setAlarmManager(){
+    fun scheduleNotificationService(){
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
+        val intent = Intent(this, AlarmReceiver::class.java)
+        val alarmIntent = PendingIntent.getBroadcast(this, 0, intent, 0)
+        alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime(), 1000 * 30, alarmIntent)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -58,7 +67,7 @@ class PostFeedActivity : AppCompatActivity() {
         rvPost.adapter = PostAdapter(posts, {post: Post -> startPostDetailActivity(post)})
     }
 
-    internal inner class someTask() : AsyncTask<Void, Void, List<Post>>() {
+    internal inner class loadPostsTask() : AsyncTask<Void, Void, List<Post>>() {
         var posts : List<Post>? = null
 
         override fun doInBackground(vararg params: Void?): List<Post>? {
@@ -80,7 +89,7 @@ class PostFeedActivity : AppCompatActivity() {
     }
 
     override fun onStart() {
-        someTask().execute()
+        loadPostsTask().execute()
         super.onStart()
     }
 }
